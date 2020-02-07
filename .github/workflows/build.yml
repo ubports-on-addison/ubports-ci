@@ -46,7 +46,7 @@ jobs:
         mkdir -p ~/bin
         wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P ~/bin
         chmod +x ~/bin/repo
-        git config --global user.name "UBports Redmi 4X CI"
+        git config --global user.name "UBports Moto Z Play CI"
         git config --global user.email "thisemaildoesnotexist@exist.com"
 
     - name: Downloading source code
@@ -60,10 +60,9 @@ jobs:
     - name: Clone device spec source
       run: |
         source halium.env
-        git clone https://github.com/ubports-santoni/android_device_xiaomi_santoni.git $ANDROID_ROOT/device/xiaomi/santoni --depth=1
-        git clone https://github.com/ubports-santoni/android_vendor_xiaomi_santoni.git $ANDROID_ROOT/vendor/xiaomi --depth=1
-        git clone https://github.com/ubports-santoni/android_kernel_xiaomi_santoni.git $ANDROID_ROOT/kernel/xiaomi/msm8937 --depth=1
-        git clone https://android.googlesource.com/platform/external/curl.git -b android-7.1.2_r37 $ANDROID_ROOT/external/libcurl --depth=1
+        git clone https://github.com/ubports-on-addison/android_device_motorola_addison.git $ANDROID_ROOT/device/motorola/addison --depth=1
+        git clone https://github.com/ubports-on-addison/proprietary_vendor_motorola.git $ANDROID_ROOT/vendor/motorola -b halium-7.1 --depth=1
+        git clone https://github.com/ubports-on-addison/android_kernel_motorola_msm8953.git $ANDROID_ROOT/kernel/motorola/msm8953 --depth=1
 
     - name: Build HAL
       run: |
@@ -75,10 +74,10 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: halium-boot image
-        path: /home/runner/work/halium/out/target/product/santoni/halium-boot.img
+        path: /home/runner/work/halium/out/target/product/addison/halium-boot.img
 
     - name : Upload system image
       uses: actions/upload-artifact@master
       with:
         name: System image
-        path: /home/runner/work/halium/out/target/product/santoni/system.img
+        path: /home/runner/work/halium/out/target/product/addison/system.img
